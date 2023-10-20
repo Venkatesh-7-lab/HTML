@@ -1,0 +1,49 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("survey-form");
+    const submitButton = document.getElementById("submit-button");
+    const resetButton = document.getElementById("reset-button");
+    const popup = document.getElementById("popup");
+    const popupContent = document.getElementById("popup-content");
+
+    submitButton.addEventListener("click", function() {
+
+        if (form.checkValidity()) {
+
+            const firstName = document.getElementById("first-name").value;
+            const lastName = document.getElementById("last-name").value;
+            const dob = document.getElementById("dob").value;
+            const country = document.getElementById("country").value;
+            const genderElements = document.querySelectorAll('input[name="gender"]:checked');
+            const gender = [...genderElements].map(el => el.value).join(", ");
+            const profession = document.getElementById("profession").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+
+
+            popupContent.innerHTML = `
+                <p><b>First Name:</b> ${firstName}</p>
+                <p><b>Last Name:</b> ${lastName}</p>
+                <p><b>Date of Birth:</b> ${dob}</p>
+                <p><b>Country:</b> ${country}</p>
+                <p><b>Gender:</b> ${gender}</p>
+                <p><b>Profession:</b> ${profession}</p>
+                <p><b>Email:</b> ${email}</p>
+                <p><b>Mobile Number:</b> ${mobile}</p>
+            `;
+
+            popup.style.display = "block";
+        } else {
+            alert("Please fill out all required fields.");
+        }
+    });
+
+    resetButton.addEventListener("click", function() {
+        form.reset();
+    });
+
+
+    document.getElementById("close-popup").addEventListener("click", function() {
+        popup.style.display = "none";
+        form.reset();
+    });
+});
